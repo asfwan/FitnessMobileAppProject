@@ -1,16 +1,12 @@
 <template>
-  <div class="about">
-      
-  </div>
+    <div>
+        <h1>Welcome To @ionic/vue</h1>
+        <img alt="Vue logo" src="../assets/logo.png">
+    </div>
 </template>
 
 <script>
-import { Component, Vue } from 'vue';
-@Component()
-  export default class MenuExample extends Vue {
-    openFirst() {
-      this.menu.enable(true, 'first');
-      this.menu.open('first');
-    }
-  }
+export default {
+  name: "challenges",
+};
 </script>

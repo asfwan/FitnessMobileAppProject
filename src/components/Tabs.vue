@@ -1,6 +1,9 @@
 <template>
     <ion-tabs>
-      <slot/>
+      <Page :header_title="header_title">
+        <slot/>
+      </Page>
+
       <ion-tab tab="/"></ion-tab>
       <ion-tab tab="/timeline"></ion-tab>
       <ion-tab tab="/nearby"></ion-tab>
@@ -29,11 +32,17 @@
         </ion-tab-button>
 
       </ion-tab-bar>
+
     </ion-tabs>
 </template>
 
 <script>
+import Page from '@/components/Page';
 export default {
   name: 'tabs',
+  props: ['header_title'],
+  components:{
+    Page
+  }
 }
 </script>

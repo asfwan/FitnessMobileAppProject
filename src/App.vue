@@ -1,7 +1,7 @@
 <template>
   <div id="app">
 
-    <Tabs>
+    <Tabs header_title="Cardio Challenges">
         <router-view/>
     </Tabs>
 
