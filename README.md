@@ -27,3 +27,8 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+Steps to start the project:
+1. run 'npm install in the project directory'
+2. run 'npm run serve'
