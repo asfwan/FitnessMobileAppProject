@@ -4,10 +4,10 @@
         <slot/>
       </Page>
 
-      <ion-tab tab="/"></ion-tab>
+      <!--ion-tab tab="/"></ion-tab>
       <ion-tab tab="/timeline"></ion-tab>
       <ion-tab tab="/nearby"></ion-tab>
-      <ion-tab tab="/challenges"></ion-tab>
+      <ion-tab tab="/challenges"></ion-tab-->
 
       <ion-tab-bar slot="bottom">
 
@@ -21,7 +21,7 @@
           <ion-label>Timeline</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="/nearby">
+        <ion-tab-button tab="/nearby" :selectedTab="true">
           <ion-icon name="pin"></ion-icon>
           <ion-label>Nearby</ion-label>
         </ion-tab-button>

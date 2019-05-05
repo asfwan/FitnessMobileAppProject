@@ -3,34 +3,18 @@
 
         <ion-item>
          <ion-searchbar placeholder="Search for a Challenge"
-            @ion-change="search()" v-on:click="search()"></ion-searchbar>
+            @ionChange="search($event)"></ion-searchbar>
         </ion-item>
 
         <ion-item>
-           <ion-range ref="rangeDualKnobs" dual-knobs="true" min="1" max="3" step="1" snaps="true">
+           <ion-range min="1" max="3" step="1" snaps="true"
+            @ionChange="levelChange($event)">
             <ion-label slot="start">Beginner</ion-label>
             <ion-label slot="end">Advanced</ion-label>
            </ion-range>
         </ion-item>
 
-        <ion-toolbar>
-    <ion-buttons slot="secondary">
-      <ion-button>
-        <ion-icon slot="icon-only" name="contact"></ion-icon>
-      </ion-button>
-      <ion-button>
-        <ion-icon slot="icon-only" name="search"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title>Default Buttons</ion-title>
-    <ion-buttons slot="primary">
-      <ion-button color="secondary">
-        <ion-icon slot="icon-only" name="more"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-
-        <Card v-for="item of items" :item="item" :key="item.id"/>
+        <Card v-for="item of cards" :item="item" :key="item.id"/>
     </div>
 </template>
 
@@ -41,40 +25,95 @@ export default {
   components:{
     Card
   },
-  data(){
+  data:function(){
     return {
+        searchQuery:'',
+        levelSelected:"Beginner",
         items:[
-            {
-                id:1,
-                title:"500 Calories Run",
-                image:"/images/card-02-mod.png",
-                level:"Intermediate",
-                calories:500,
-                points:100
-            },
-            {
-                id:2,
-                title:"2.4KM Run",
-                image:"/images/card-01-mod.png",
-                level:"Intermediate",
-                calories:640,
-                points:100
-            },
-            {
-                id:3,
-                title:"2.4KM Run",
-                image:"/images/card-01-mod.png",
-                level:"Intermediate",
-                calories:640,
-                points:100
-            }
-        ]
+          {
+              title:"500 Calories Run",
+              image:"/images/card-02-mod.png",
+              level:"Intermediate",
+              calories:500,
+              points:100
+          },
+          {
+              title:"2.4KM Run",
+              image:"/images/card-01-mod.png",
+              level:"Intermediate",
+              calories:640,
+              points:100
+          },
+          {
+              title:"2.4KM Run",
+              image:"/images/card-01-mod.png",
+              level:"Intermediate",
+              calories:640,
+              points:100
+          },
+          {
+              title:"1KM Run",
+              image:"/images/card-01-mod.png",
+              level:"Beginner",
+              calories:200,
+              points:50
+          },
+          {
+              title:"5KM Run",
+              image:"/images/card-01-mod.png",
+              level:"Advanced",
+              calories:1000,
+              points:500
+          }
+        ],
+        cards:null
     };
   },
   methods:{
-      search:()=>{
-        this.console.log('test')
+      repopulateItems(){
+          this.cards = this.items.filter((item)=>{
+            if(this.searchQuery=='') return item.level == this.levelSelected;
+            return (
+                item.level == this.levelSelected
+                &&
+                item.title.toLowerCase()
+                    .includes(this.searchQuery.toLowerCase())
+            );
+          });
+          console.log(this.levelSelected);
+          console.log(this.searchQuery);
+      },
+      search($event){
+        this.searchQuery = $event.target.value;
+        this.repopulateItems();
+        //console.log($event.target.value);
+      },
+      levelChange($event){
+        switch($event.target.value){
+            case 1:
+            default:
+            this.levelSelected = "Beginner";
+            break;
+            case 2:
+            this.levelSelected = "Intermediate";
+            break;
+            case 3:
+            this.levelSelected = "Advanced";
+            break;
+        }
+        this.repopulateItems();
+        console.log(this.levelSelected);
+        console.log(this.items);
       }
+  },
+  created(){
+    this.items.forEach((item,idx)=>{
+        item.id = idx;
+        return item;
+    });
+    //this.cards = this.items;
+    this.repopulateItems();
+    console.log(this.cards);
   }
 };
 
